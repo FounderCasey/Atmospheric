@@ -28,8 +28,12 @@ struct Weather {
         }
     }
     
-    init(weatherData: [String: AnyObject]) {
-        city = weatherData["name"] as! String
+    init?(weatherData: [String: AnyObject]) {
+        guard let cityCheck = weatherData["name"] as? String else {
+            return nil
+        }
+        
+        city = cityCheck
         
         let weatherDict = weatherData["weather"]![0] as! [String: AnyObject]
         description = weatherDict["description"] as! String

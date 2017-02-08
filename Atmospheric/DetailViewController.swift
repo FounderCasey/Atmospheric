@@ -17,6 +17,8 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
     @IBOutlet var humidityLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var backgroundImageView: UIImageView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var noConnectionView: UIView!
     
     var selectedCity = String()
     
@@ -30,12 +32,13 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("Selected City: \(selectedCity)")
+        activityIndicator.startAnimating()
         client.getWeatherForCity(city: selectedCity)
     }
     
     func successWeather(weather: Weather) {
         performUIUpdatesOnMain {
+            self.noConnectionView.isHidden = true
             self.cityLabel.text = weather.city
             self.descriptionLabel.text = weather.description
             self.tempLabel.text = "\(Int(round(weather.currentTemp)))°"
@@ -83,12 +86,17 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
                 self.humidityLabel.textColor = .white
                 self.descriptionLabel.textColor = .white
             }
+            self.activityIndicator.stopAnimating()
         }
     }
     
     func errorWeather(error: NSError) {
         print("Error Weather: \(error)")
-        displayAlert(title: "Connection Error", message: "Failed to get weather")
+        performUIUpdatesOnMain {
+            self.noConnectionView.isHidden = false
+            self.activityIndicator.startAnimating()
+            self.displayAlert(title: "Connection Error", message: "Failed to get weather")
+        }
     }
     
     func displayAlert(title: String, message: String) {

@@ -33,7 +33,7 @@ class OpenWeatherClient {
                     let parsedResult = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String:AnyObject]
                     let weather = Weather(weatherData: parsedResult)
                     
-                    self.delegate.successWeather(weather: weather)
+                    self.delegate.successWeather(weather: weather!)
                 } catch let error as NSError {
                     // An error occurred while trying to convert the data into a Swift dictionary.
                     print("JSON error description: \(error.description)")

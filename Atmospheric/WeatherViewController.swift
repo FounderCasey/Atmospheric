@@ -18,6 +18,8 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var noConnectionView: UIView!
     
     var client: OpenWeatherClient!
     
@@ -28,6 +30,8 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        noConnectionView.isHidden = true
+        activityIndicator.startAnimating()
         client.getWeatherForCity(city: "San-Francisco")
     }
 
@@ -39,6 +43,8 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     
     func successWeather(weather: Weather) {
         performUIUpdatesOnMain {
+            self.noConnectionView.isHidden = true
+            self.activityIndicator.startAnimating()
             self.cityLabel.text = weather.city
             self.descriptionLabel.text = weather.description
             self.tempLabel.text = "\(Int(round(weather.currentTemp)))°"
@@ -86,12 +92,15 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
                 self.humidityLabel.textColor = .white
                 self.descriptionLabel.textColor = .white
             }
+            self.activityIndicator.stopAnimating()
         }
     }
     
     func errorWeather(error: NSError) {
         performUIUpdatesOnMain {
-            self.displayAlert(title: "Error", message: "Failed to get weather.")
+            self.activityIndicator.startAnimating()
+            self.displayAlert(title: "Connection Error", message: "Failed to get weather")
+            self.noConnectionView.isHidden = false
         }
         print("")
         print("ErrorWeather: \(error)")
