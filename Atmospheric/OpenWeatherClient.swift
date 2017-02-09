@@ -25,20 +25,22 @@ class OpenWeatherClient {
         let urlString = "\(Constants.baseURL)?APPID=\(Constants.apiKey)&units=imperial&q=\(city)"
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
+        print(request)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
             if let error = error {
                 self.delegate.errorWeather(error: error as NSError)
-            } else {
-                do {
-                    let parsedResult = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String:AnyObject]
-                    let weather = Weather(weatherData: parsedResult)
-                    
-                    self.delegate.successWeather(weather: weather!)
-                } catch let error as NSError {
-                    // An error occurred while trying to convert the data into a Swift dictionary.
-                    print("JSON error description: \(error.description)")
-                    self.delegate.errorWeather(error: error)
+            }
+            
+            do {
+                let parsedResult = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String:AnyObject]
+                
+                guard let weather = Weather(weatherData: parsedResult) else {
+                    return
                 }
+                self.delegate.successWeather(weather: weather)
+            } catch let error as NSError {
+                print("JSON error description: \(error.description)")
+                self.delegate.errorWeather(error: error)
             }
         }
         task.resume()

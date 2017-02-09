@@ -27,12 +27,20 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         client = OpenWeatherClient(delegate: self)
-        print("Selected City: \(selectedCity)")
+        var timer = Timer.scheduledTimer(timeInterval: 0.4, target: self, selector: #selector(self.timeOut), userInfo: nil, repeats: false);
+    }
+    
+    func timeOut() {
+        if tempLabel.text == "" {
+            displayDismiss(title: "Oops...", message: "That doesn't exist")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        activityIndicator.startAnimating()
+        performUIUpdatesOnMain {
+            self.activityIndicator.startAnimating()
+        }
         client.getWeatherForCity(city: selectedCity)
     }
     
@@ -94,15 +102,17 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
         print("Error Weather: \(error)")
         performUIUpdatesOnMain {
             self.noConnectionView.isHidden = false
-            self.activityIndicator.startAnimating()
+            self.activityIndicator.stopAnimating()
             self.displayAlert(title: "Connection Error", message: "Failed to get weather")
         }
     }
     
-    func displayAlert(title: String, message: String) {
+    func displayDismiss(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
-        alert.addAction(action)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .default, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        })
+        alert.addAction(dismissAction)
         present(alert, animated: true, completion: nil)
     }
     

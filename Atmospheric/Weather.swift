@@ -15,6 +15,7 @@ struct Weather {
     var windSpeed: Double
     var icon: String
     var description: String
+    var cod: Int
     
     var celsius: Double {
         get {
@@ -45,5 +46,7 @@ struct Weather {
         
         let windDict = weatherData["wind"] as! [String: AnyObject]
         windSpeed = windDict["speed"] as! Double
+        
+        cod = weatherData["cod"] as! Int
     }
 }

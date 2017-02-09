@@ -27,12 +27,15 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
         super.viewDidLoad()
         client = OpenWeatherClient(delegate: self)
         cityTextField.delegate = self
+        if tempLabel.text == "" {
+            activityIndicator.startAnimating()
+            client.getWeatherForCity(city: "San-Francisco")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         noConnectionView.isHidden = true
-        activityIndicator.startAnimating()
-        client.getWeatherForCity(city: "San-Francisco")
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -44,7 +47,7 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     func successWeather(weather: Weather) {
         performUIUpdatesOnMain {
             self.noConnectionView.isHidden = true
-            self.activityIndicator.startAnimating()
+            self.activityIndicator.stopAnimating()
             self.cityLabel.text = weather.city
             self.descriptionLabel.text = weather.description
             self.tempLabel.text = "\(Int(round(weather.currentTemp)))°"
@@ -92,13 +95,18 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
                 self.humidityLabel.textColor = .white
                 self.descriptionLabel.textColor = .white
             }
-            self.activityIndicator.stopAnimating()
+            print(weather.cod)
+            if weather.cod == 200 {
+                print("success")
+            } else {
+                self.displayAlert(title: "Oops...", message: "That city doesnt exist")
+            }
         }
     }
     
     func errorWeather(error: NSError) {
         performUIUpdatesOnMain {
-            self.activityIndicator.startAnimating()
+            self.activityIndicator.stopAnimating()
             self.displayAlert(title: "Connection Error", message: "Failed to get weather")
             self.noConnectionView.isHidden = false
         }
@@ -111,7 +119,10 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
         if (textField.text?.isEmpty)! {
             displayAlert(title: "Oops!", message: "Lets add some characters")
         } else {
-            client.getWeatherForCity(city: textField.text!.replacingOccurrences(of: " ", with: "-"))
+            performUIUpdatesOnMain {
+                self.activityIndicator.startAnimating()
+            }
+            client.getWeatherForCity(city: textField.text!.replacingOccurrences(of: " ", with: "-").addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
             textField.text = ""
         }
         return true
@@ -120,13 +131,15 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
+
+}
+
+extension UIViewController {
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-
 }
 

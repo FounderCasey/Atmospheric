@@ -15,7 +15,6 @@ class TableViewController: UITableViewController, UITextFieldDelegate {
     
     var cityToPass = String()
     
-    //var locations = [String]()
     var locations = [NSManagedObject]()
     
     override func viewDidLoad() {
@@ -34,8 +33,8 @@ class TableViewController: UITableViewController, UITextFieldDelegate {
         
         do {
             locations = try context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print(error)
+        } catch _ as NSError {
+            displayAlert(title: "Oops...", message: "Error fetching data")
         }
     }
     
@@ -43,7 +42,7 @@ class TableViewController: UITableViewController, UITextFieldDelegate {
         if (cityTextField.text?.isEmpty)! {
             displayAlert(title: "Oops!", message: "Let's add some characters!")
         } else {
-            self.saveLocation(location: cityTextField.text!.replacingOccurrences(of: " ", with: "-"))
+            self.saveLocation(location: cityTextField.text!.replacingOccurrences(of: " ", with: "-").addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
             cityTextField.text = ""
         }
         tableView.reloadData()
@@ -53,7 +52,7 @@ class TableViewController: UITableViewController, UITextFieldDelegate {
         if ((textField.text?.isEmpty)!) {
             displayAlert(title: "Oops!", message: "Let's add some characters!")
         } else {
-            self.saveLocation(location: textField.text!)
+            self.saveLocation(location: textField.text!.replacingOccurrences(of: " ", with: "-").addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)
             textField.text = ""
             textField.resignFirstResponder()
         }
@@ -118,13 +117,6 @@ class TableViewController: UITableViewController, UITextFieldDelegate {
         } catch let error as NSError {
             print("Could not save \(error), \(error.userInfo)")
         }
-    }
-    
-    func displayAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
     }
     
     override var prefersStatusBarHidden: Bool {
