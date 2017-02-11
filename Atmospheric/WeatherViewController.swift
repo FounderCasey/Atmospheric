@@ -18,6 +18,7 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var upperImageView: UIImageView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var noConnectionView: UIView!
     
@@ -80,27 +81,22 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
                 default: break
             }
             
-            if weather.icon.contains("d") {
-                self.backgroundImageView.image = #imageLiteral(resourceName: "dayBackground")
-                self.cityLabel.textColor = .black
-                self.tempLabel.textColor = .black
-                self.windLabel.textColor = .black
-                self.humidityLabel.textColor = .black
-                self.descriptionLabel.textColor = .black
-            } else if weather.icon.contains("n") {
-                self.backgroundImageView.image = #imageLiteral(resourceName: "nightBackground")
-                self.cityLabel.textColor = .white
-                self.tempLabel.textColor = .white
-                self.windLabel.textColor = .white
-                self.humidityLabel.textColor = .white
-                self.descriptionLabel.textColor = .white
-            }
-            print(weather.cod)
-            if weather.cod == 200 {
-                print("success")
-            } else {
-                self.displayAlert(title: "Oops...", message: "That city doesnt exist")
-            }
+            /* UPDATING IN V2
+             if weather.icon.contains("d") {
+             self.backgroundImageView.image = #imageLiteral(resourceName: "dayBackground")
+             self.cityLabel.textColor = .black
+             self.tempLabel.textColor = .black
+             self.windLabel.textColor = .black
+             self.humidityLabel.textColor = .black
+             self.descriptionLabel.textColor = .black
+             } else if weather.icon.contains("n") {
+             self.backgroundImageView.image = #imageLiteral(resourceName: "nightBackground")
+             self.cityLabel.textColor = .white
+             self.tempLabel.textColor = .white
+             self.windLabel.textColor = .white
+             self.humidityLabel.textColor = .white
+             self.descriptionLabel.textColor = .white
+             }*/
         }
     }
     
@@ -112,6 +108,10 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
         }
         print("")
         print("ErrorWeather: \(error)")
+    }
+    
+    @IBAction func attributes(_ sender: Any) {
+        displayAlert(title: "Attributes", message: "Weather Icons provided by: Eucalyp - FlatIcon\nList Icons provided by: Madebyoliver - FlatIcon")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

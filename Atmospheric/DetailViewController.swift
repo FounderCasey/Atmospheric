@@ -78,7 +78,7 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
                     self.imageView.image = #imageLiteral(resourceName: "snow")
                 default: break
             }
-            
+            /* UPDATING IN V2
             if weather.icon.contains("d") {
                 self.backgroundImageView.image = #imageLiteral(resourceName: "dayBackground")
                 self.cityLabel.textColor = .black
@@ -93,7 +93,7 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
                 self.windLabel.textColor = .white
                 self.humidityLabel.textColor = .white
                 self.descriptionLabel.textColor = .white
-            }
+            }*/
             self.activityIndicator.stopAnimating()
         }
     }
