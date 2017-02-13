@@ -17,3 +17,5 @@ Atmospheric uses Swift 3 and Xcode 8 to get the app up and running. We use the O
 # Issues
 ___________________________________
 There seems to be some small issues with displaying the correct icons with the correct weather description. For example; icon ‘10n’ has several sub-descriptions(light rain-moderate rain) so icons are repeated.
+
+![alt text](http://imgur.com/olqqew0 "Atmospheric")
