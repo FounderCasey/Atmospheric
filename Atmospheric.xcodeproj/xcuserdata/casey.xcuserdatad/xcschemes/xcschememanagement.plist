@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Atmospheric Weather.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Atmospheric.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +18,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>C91315D41E4292FE004E68A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C945D0591E53E385004651F6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
