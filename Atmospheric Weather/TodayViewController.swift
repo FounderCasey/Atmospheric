@@ -23,7 +23,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, OpenWeatherDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         client = OpenWeatherClient(delegate: self)
-        client.getWeatherForCity(city: "\(cities[4])")
+        client.getWeatherForCity(city: "\(cities[arc4random_uniform(UInt32(5))])")
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {

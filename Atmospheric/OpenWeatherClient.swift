@@ -25,7 +25,6 @@ class OpenWeatherClient {
         let urlString = "\(Constants.baseURL)?APPID=\(Constants.apiKey)&units=imperial&q=\(city)"
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
-        print(request)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
             if let error = error {
                 self.delegate.errorWeather(error: error as NSError)
