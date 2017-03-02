@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldDelegate {
+class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
@@ -23,6 +24,7 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     @IBOutlet var noConnectionView: UIView!
     
     var client: OpenWeatherClient!
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,7 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
         if tempLabel.text == "" {
             activityIndicator.startAnimating()
             client.getWeatherForCity(city: "San-Francisco")
+            getWeatherFromLocation()
         }
     }
     
@@ -38,11 +41,43 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
         super.viewWillAppear(animated)
         noConnectionView.isHidden = true
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         get {
             return true
         }
+    }
+    
+    func getWeatherFromLocation() {
+        guard CLLocationManager.locationServicesEnabled() else {
+            print("Location services are disabled")
+            return
+        }
+        
+        let authStatus = CLLocationManager.authorizationStatus()
+        guard authStatus == .authorizedWhenInUse else {
+            switch authStatus {
+            case .denied, .restricted:
+                print("Location services are disabled")
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            default:
+                break
+            }
+            return
+        }
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let newLocation = locations.last!
+        print(newLocation)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error: \(error)")
     }
     
     func successWeather(weather: Weather) {
@@ -80,6 +115,8 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
                     self.imageView.image = #imageLiteral(resourceName: "snow")
                 default: break
             }
+            
+            print(weather.icon)
             
             /* UPDATING IN V2
              if weather.icon.contains("d") {
