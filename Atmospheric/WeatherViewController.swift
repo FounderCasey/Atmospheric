@@ -147,7 +147,6 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     
     @IBAction func attributes(_ sender: Any) {
         displayAlert(title: "Attributes", message: "Weather Icons provided by: Eucalyp - FlatIcon\nList Icons provided by: Madebyoliver - FlatIcon")
-        getWeatherFromLocation()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
