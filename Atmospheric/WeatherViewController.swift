@@ -29,13 +29,16 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
         super.viewDidLoad()
         client = OpenWeatherClient(delegate: self)
         cityTextField.delegate = self
-        if tempLabel.text == "" {
+        /*if tempLabel.text == "" {
             activityIndicator.startAnimating()
             client.getWeatherForCity(city: "San-Francisco")
             getWeatherFromLocation()
         }
         
-        client.getWeatherForCity(city: "San-Francisco")
+        client.getWeatherForCity(city: "Paris")
+        getWeatherFromLocation()
+        */
+        
         getWeatherFromLocation()
     }
     
@@ -59,22 +62,24 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
             case .notDetermined:
                 locationManager.requestWhenInUseAuthorization()
             default:
+                print("Shouldn't reach this")
                 break
             }
             return
         }
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
+        client.getWeatherForCoordinates(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude)
         print(newLocation)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error: \(error)")
+        print("Error: \(error.localizedDescription)")
     }
     
     func successWeather(weather: Weather) {
@@ -142,6 +147,7 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     
     @IBAction func attributes(_ sender: Any) {
         displayAlert(title: "Attributes", message: "Weather Icons provided by: Eucalyp - FlatIcon\nList Icons provided by: Madebyoliver - FlatIcon")
+        getWeatherFromLocation()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -209,46 +209,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="DayGradient" translatesAutoresizingMaskIntoConstraints="NO" id="5dE-L3-cwM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DayGradient" translatesAutoresizingMaskIntoConstraints="NO" id="5dE-L3-cwM">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ps3-kx-oBz">
-                                <rect key="frame" x="16" y="528" width="288" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ps3-kx-oBz">
+                                <rect key="frame" x="15" y="478" width="288" height="29"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EPH-TC-x0a">
-                                <rect key="frame" x="17" y="501" width="287" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yTS-Nz-bt9">
+                                <rect key="frame" x="16" y="526" width="286" height="29"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yTS-Nz-bt9">
-                                <rect key="frame" x="16" y="555" width="286" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="21"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z2R-Jd-Ar9">
-                                <rect key="frame" x="17" y="485" width="287" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z2R-Jd-Ar9">
+                                <rect key="frame" x="15" y="375" width="287" height="47"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="34"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="o5O-xq-OjE">
-                                <rect key="frame" x="142.5" y="265.5" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="29" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xja-2G-YvO">
-                                <rect key="frame" x="18" y="469" width="285" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="29" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xja-2G-YvO">
+                                <rect key="frame" x="36" y="264" width="267" height="103"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="75"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -259,12 +242,43 @@
                                     <constraint firstAttribute="width" secondItem="cEy-xB-fce" secondAttribute="height" multiplier="1:1" id="4x3-Pu-FP3"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EPH-TC-x0a">
+                                <rect key="frame" x="15" y="430" width="287" height="29"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="o5O-xq-OjE">
+                                <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Xja-2G-YvO" secondAttribute="trailing" constant="1" id="0TK-gt-jIE"/>
+                            <constraint firstItem="Xja-2G-YvO" firstAttribute="leading" secondItem="0Od-cV-jmy" secondAttribute="leadingMargin" constant="20" id="0YQ-Cm-abn"/>
+                            <constraint firstItem="5dE-L3-cwM" firstAttribute="leading" secondItem="0Od-cV-jmy" secondAttribute="leading" id="2m0-b6-5Mh"/>
+                            <constraint firstItem="5dE-L3-cwM" firstAttribute="top" secondItem="0Od-cV-jmy" secondAttribute="top" id="3Ff-5j-zbb"/>
+                            <constraint firstItem="ps3-kx-oBz" firstAttribute="leading" secondItem="0Od-cV-jmy" secondAttribute="leading" constant="15" id="5Us-0z-d0C"/>
+                            <constraint firstItem="yTS-Nz-bt9" firstAttribute="top" secondItem="ps3-kx-oBz" secondAttribute="bottom" constant="19" id="8mD-Cz-Cmm"/>
+                            <constraint firstAttribute="trailing" secondItem="EPH-TC-x0a" secondAttribute="trailing" constant="18" id="9He-JX-EaV"/>
+                            <constraint firstAttribute="trailing" secondItem="yTS-Nz-bt9" secondAttribute="trailing" constant="18" id="9tO-n6-TU3"/>
+                            <constraint firstAttribute="trailing" secondItem="5dE-L3-cwM" secondAttribute="trailing" id="BXO-Vm-Gwp"/>
+                            <constraint firstItem="ps3-kx-oBz" firstAttribute="top" secondItem="EPH-TC-x0a" secondAttribute="bottom" constant="19" id="Hm3-YH-Wws"/>
+                            <constraint firstItem="z2R-Jd-Ar9" firstAttribute="leading" secondItem="0Od-cV-jmy" secondAttribute="leading" constant="15" id="I2A-hf-278"/>
+                            <constraint firstItem="o5O-xq-OjE" firstAttribute="centerY" secondItem="0Od-cV-jmy" secondAttribute="centerY" id="Kj7-zF-IyI"/>
+                            <constraint firstAttribute="trailing" secondItem="z2R-Jd-Ar9" secondAttribute="trailing" constant="18" id="Lqi-tb-jSh"/>
                             <constraint firstItem="cEy-xB-fce" firstAttribute="leading" secondItem="0Od-cV-jmy" secondAttribute="leadingMargin" constant="77" id="NLF-Wh-DF0"/>
+                            <constraint firstItem="o5O-xq-OjE" firstAttribute="centerX" secondItem="0Od-cV-jmy" secondAttribute="centerX" id="Rzc-na-eAH"/>
+                            <constraint firstItem="C4q-MF-yIM" firstAttribute="top" secondItem="5dE-L3-cwM" secondAttribute="bottom" id="S5Q-XT-J5g"/>
                             <constraint firstItem="cEy-xB-fce" firstAttribute="top" secondItem="OMP-Jp-2kd" secondAttribute="bottom" constant="56" id="SXZ-e0-Jag"/>
+                            <constraint firstItem="yTS-Nz-bt9" firstAttribute="leading" secondItem="0Od-cV-jmy" secondAttribute="leading" constant="16" id="TFk-SE-lP5"/>
+                            <constraint firstItem="EPH-TC-x0a" firstAttribute="top" secondItem="z2R-Jd-Ar9" secondAttribute="bottom" constant="8" id="VkB-HW-wNO"/>
+                            <constraint firstItem="EPH-TC-x0a" firstAttribute="leading" secondItem="0Od-cV-jmy" secondAttribute="leading" constant="15" id="hp8-t1-ECK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cEy-xB-fce" secondAttribute="trailing" constant="78.5" id="jms-xw-Z9K"/>
+                            <constraint firstItem="C4q-MF-yIM" firstAttribute="top" secondItem="yTS-Nz-bt9" secondAttribute="bottom" constant="13" id="l3J-DE-Zvp"/>
+                            <constraint firstAttribute="trailing" secondItem="ps3-kx-oBz" secondAttribute="trailing" constant="17" id="pS7-LK-GZw"/>
+                            <constraint firstItem="z2R-Jd-Ar9" firstAttribute="top" secondItem="Xja-2G-YvO" secondAttribute="bottom" constant="8" id="zzV-Li-xfS"/>
                         </constraints>
                     </view>
                     <connections>

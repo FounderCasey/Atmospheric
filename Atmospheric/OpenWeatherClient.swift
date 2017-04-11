@@ -21,11 +21,19 @@ class OpenWeatherClient {
         self.delegate = delegate
     }
     
+    func getWeatherForCoordinates(latitude: Double, longitude: Double) {
+        let locationURL = URL(string: "\(Constants.baseURL)?APPID=\(Constants.apiKey)&units=imperial&lat=\(latitude)&lon=\(longitude)")!
+        getWeatherFromClient(weatherRequest: locationURL as URL)
+    }
+    
     func getWeatherForCity(city: String) {
-        let urlString = "\(Constants.baseURL)?APPID=\(Constants.apiKey)&units=imperial&q=\(city)"
-        let url = URL(string: urlString)
-        let request = URLRequest(url: url!)
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
+        let cityURL = URL(string: "\(Constants.baseURL)?APPID=\(Constants.apiKey)&units=imperial&q=\(city)")!
+        getWeatherFromClient(weatherRequest: cityURL as URL)
+    }
+    
+    func getWeatherFromClient(weatherRequest: URL) {
+        let session = URLSession.shared
+        let task = session.dataTask(with: weatherRequest) { (data, response, error) -> Void in
             if let error = error {
                 self.delegate.errorWeather(error: error as NSError)
             }
@@ -50,6 +58,7 @@ class OpenWeatherClient {
         }
         task.resume()
     }
+    
 }
 
 struct Constants {

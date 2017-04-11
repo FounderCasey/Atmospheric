@@ -25,8 +25,8 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.hidesWhenStopped = true
         client = OpenWeatherClient(delegate: self)
-        //var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timeOut), userInfo: nil, repeats: false);
     }
     
     func timeOut() {
@@ -93,6 +93,7 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
                 self.descriptionLabel.textColor = .white
             }*/
             self.activityIndicator.stopAnimating()
+            print("Found weather")
         }
     }
     
