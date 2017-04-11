@@ -21,7 +21,6 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var upperImageView: UIImageView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var noConnectionView: UIView!
     
     var client: OpenWeatherClient!
     let locationManager = CLLocationManager()
@@ -35,11 +34,9 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
             client.getWeatherForCity(city: "San-Francisco")
             getWeatherFromLocation()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        noConnectionView.isHidden = true
+        
+        client.getWeatherForCity(city: "San-Francisco")
+        getWeatherFromLocation()
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -82,7 +79,6 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     
     func successWeather(weather: Weather) {
         performUIUpdatesOnMain {
-            self.noConnectionView.isHidden = true
             self.activityIndicator.stopAnimating()
             self.cityLabel.text = weather.city
             self.descriptionLabel.text = weather.description
@@ -116,8 +112,6 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
                 default: break
             }
             
-            print(weather.icon)
-            
             /* UPDATING IN V2
              if weather.icon.contains("d") {
              self.backgroundImageView.image = #imageLiteral(resourceName: "dayBackground")
@@ -140,8 +134,7 @@ class WeatherViewController: UIViewController, OpenWeatherDelegate, UITextFieldD
     func errorWeather(error: NSError) {
         performUIUpdatesOnMain {
             self.activityIndicator.stopAnimating()
-            self.displayAlert(title: "Connection Error", message: "Failed to get weather")
-            self.noConnectionView.isHidden = false
+            self.displayAlert(title: "Oops!", message: "We failed to get the weather.")
         }
         print("")
         print("ErrorWeather: \(error)")

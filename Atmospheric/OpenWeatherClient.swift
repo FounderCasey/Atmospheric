@@ -30,6 +30,12 @@ class OpenWeatherClient {
                 self.delegate.errorWeather(error: error as NSError)
             }
             
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                let error = NSError(domain: "statusCode", code: ((response as? HTTPURLResponse)?.statusCode)!, userInfo: [NSLocalizedDescriptionKey: "Your request returned a status code other than 2xx!"])
+                self.delegate.errorWeather(error: error)
+                return
+            }
+            
             do {
                 let parsedResult = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String:AnyObject]
                 

@@ -18,7 +18,6 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var backgroundImageView: UIImageView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var noConnectionView: UIView!
     
     var selectedCity = String()
     
@@ -27,7 +26,7 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         client = OpenWeatherClient(delegate: self)
-        var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timeOut), userInfo: nil, repeats: false);
+        //var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timeOut), userInfo: nil, repeats: false);
     }
     
     func timeOut() {
@@ -46,7 +45,6 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
     
     func successWeather(weather: Weather) {
         performUIUpdatesOnMain {
-            self.noConnectionView.isHidden = true
             self.cityLabel.text = weather.city
             self.descriptionLabel.text = weather.description
             self.tempLabel.text = "\(Int(round(weather.currentTemp)))°"
@@ -99,12 +97,11 @@ class DetailViewController: UIViewController, OpenWeatherDelegate {
     }
     
     func errorWeather(error: NSError) {
-        print("Error Weather: \(error)")
         performUIUpdatesOnMain {
-            self.noConnectionView.isHidden = false
             self.activityIndicator.stopAnimating()
-            self.displayAlert(title: "Connection Error", message: "Failed to get weather")
+            self.displayAlert(title: "Oops!", message: "We failed to get the weather.")
         }
+        navigationController?.popViewController(animated: true)
     }
     
     func displayDismiss(title: String, message: String) {
